@@ -28,6 +28,9 @@ export default function App() {
       }
 
       const data = await response.json();
+      if (typeof data?.reply !== "string" || !data.reply.trim()) {
+        throw new Error("Python APIの応答に有効なreplyが含まれていません。");
+      }
       setReply(data.reply);
       setState("received");
     } catch (err) {
